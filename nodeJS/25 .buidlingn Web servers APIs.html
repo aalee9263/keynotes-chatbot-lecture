@@ -9,16 +9,16 @@
         min_temp_c: 18,
     }.
 3. http://localhost:5001/weather
-4. erase a star mark and replace by '/' this in double lines of app.get/app/use
-5. now this complete web app host to be on cloud.
-6. no write base url if its on my own webserver.
-7. const url = window.location.href
+4. now this complete web app host to be on cloud.
+5. no write base url if its on my own webserver.
+6. app.mjs.. in the folder of index.html
+    const url = window.location.href
     let baseUrl = "";
-    if (url.split(":"))[0] === 'http'{
+    if (url.split(":")[0] === 'http'){
         baseUrl = 'http:localhost:5001'
     }
     else{
-        baseUrl = 'http:myapp.cyclic.app'
+        baseUrl = 'https://rich-red-centipede-tutu.cyclic.app/(your website url)'
     }
 8. crud operation (this is next class lecture)
     a. create
