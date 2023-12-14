@@ -1,15 +1,19 @@
 //hosting a website on express web serever using express.static
     // 1. create a index.html file.
     // 2. server.mjs, package.json, package-lock.json, .gitignore, node_modules
-    // 3. import path from 'path' in js file
-    // 4. const __dirname = path.resolve(); in js file
+    // 3. 
+    // 4. 
     // 5. add in package.json file 
     //    ("start"; "node server.mjs")
     //    ("dev"; "node --watch server.mjs") for auto restarting
     // 6. in terminal ... write (npm run dev)
     // 7. console.log("__dirname:", __dirname)
     //    console.log("__dirname:", path.join(__dirname, "/web"))
-    // 8. app.get('/', express.static(path.join(__dirname,"/web")))
-    //  app.use('/*', express.static(path.join(__dirname,"/web")))
+
+    // 8. import library from express static as under:
+        import path from 'path' in js file
+        const __dirname = path.resolve(); in js file
+        app.get('/', express.static(path.join(__dirname,"/web")))
+    //  app.use('/', express.static(path.join(__dirname,"/web")))
     //  above two lines.. for running multiple pages
-    // port change. 3000 to 5001
+    // 9. const port = process.env.PORT || 5001
