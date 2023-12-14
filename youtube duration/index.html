@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Progress Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #remaining-label {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Progress Tracker</h1>
+    <label for="daily-duration">Enter daily YouTube video duration (HH:MM:SS):</label>
+    <input type="text" id="daily-duration" placeholder="HH:MM:SS">
+    <button onclick="updateProgress()">Update Progress</button>
+
+    <div id="completed-label">Completed Duration:</div>
+    <div id="completed-duration">0:00:00</div>
+
+    <div id="remaining-label">Remaining Duration:</div>
+    <div id="remaining-duration">0:00:00</div>
+
+    <script>
+        var totalDuration = parseDuration("50:00:00");
+        var completedDuration = parseDuration("18:00:00");
+
+        document.getElementById("daily-duration").value = "02:00:00"; // Assuming 2 hours daily
+
+        updateDisplay();
+
+        function updateProgress() {
+            var dailyDurationInput = document.getElementById("daily-duration");
+
+            var dailyDuration = parseDuration(dailyDurationInput.value);
+            completedDuration = addDuration(completedDuration, dailyDuration);
+
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            var completedDurationDisplay = document.getElementById("completed-duration");
+            var remainingDurationDisplay = document.getElementById("remaining-duration");
+
+            completedDurationDisplay.innerText = formatDuration(completedDuration);
+            remainingDurationDisplay.innerText = formatDuration(subtractDuration(totalDuration, completedDuration));
+        }
+
+        function parseDuration(durationStr) {
+            var components = durationStr.split(":").map(function (component) {
+                return parseInt(component, 10) || 0;
+            });
+
+            return {
+                hours: components[0],
+                minutes: components[1],
+                seconds: components[2]
+            };
+        }
+
+        function subtractDuration(duration1, duration2) {
+            var result = {
+                hours: duration1.hours - duration2.hours,
+                minutes: duration1.minutes - duration2.minutes,
+                seconds: duration1.seconds - duration2.seconds
+            };
+
+            if (result.seconds < 0) {
+                result.seconds += 60;
+                result.minutes--;
+            }
+
+            if (result.minutes < 0) {
+                result.minutes += 60;
+                result.hours--;
+            }
+
+            return result;
+        }
+
+        function addDuration(duration1, duration2) {
+            var result = {
+                hours: duration1.hours + duration2.hours,
+                minutes: duration1.minutes + duration2.minutes,
+                seconds: duration1.seconds + duration2.seconds
+            };
+
+            if (result.seconds >= 60) {
+                result.seconds -= 60;
+                result.minutes++;
+            }
+
+            if (result.minutes >= 60) {
+                result.minutes -= 60;
+                result.hours++;
+            }
+
+            return result;
+        }
+
+        function formatDuration(duration) {
+            return `${padZero(duration.hours)}:${padZero(duration.minutes)}:${padZero(duration.seconds)}`;
+        }
+
+        function padZero(value) {
+            return value.toString().padStart(2, "0");
+        }
+    </script>
+</body>
+</html>
