@@ -2,17 +2,14 @@
 <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
 2. import axios from 'axios';
-//const axios = require('axios'); // legacy way
 
-// Make a request for a user with a given ID
 axios.get('/user?ID=12345')
   .then(function (response) {
-    // handle success
     console.log(response);
   })
   .catch(function (error) {
-    // handle error
     console.log(error);
-  });
+  }
 3. copy API . (https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-)
+))
+4.
